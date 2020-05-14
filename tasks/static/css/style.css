@@ -104,3 +104,15 @@ footer p {
     top: 50%;
     position: relative;
 }
+
+
+
+/* Messages */
+
+ul.messages {
+    padding: 0px;
+}
+
+ul.messages li {
+    list-style: none;
+}
