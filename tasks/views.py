@@ -1,13 +1,26 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from .models import Task
 from .forms import TaskForm
 from django.contrib import messages
 
+
+
+
+@login_required
 def taskList(requests):
-    tasks = Task.objects.all().order_by('-create_at')
+    tasks_list = Task.objects.all().order_by('-create_at')
+
+    paginator = Paginator(tasks_list, 3)
+
+    page = requests.GET.get('page')
+
+    tasks = paginator.get_page(page)
     return render(requests, 'task/list.html', {'tasks': tasks})
 
+@login_required
 def taskView(requests, id):
     task = get_object_or_404(Task, pk=id)
     data = {
@@ -15,6 +28,7 @@ def taskView(requests, id):
     }
     return render(requests, 'task/task.html', data)
 
+@login_required
 def newTask(requests):
     if requests.method == 'POST':
         form = TaskForm(requests.POST)
@@ -31,6 +45,7 @@ def newTask(requests):
         }
         return render(requests, 'task/addtask.html', data)
 
+@login_required
 def editTask(requests, id):
     task = get_object_or_404(Task, pk=id)
     form = TaskForm(instance=task)
@@ -52,6 +67,7 @@ def editTask(requests, id):
         print('Não é o método POST')
         return render(requests, 'task/edittask.html', data)
 
+@login_required
 def deleteTask(requests, id):
     task = get_object_or_404(Task, pk=id)
     task.delete()

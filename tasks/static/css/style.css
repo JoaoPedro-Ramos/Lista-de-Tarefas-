@@ -49,6 +49,7 @@
     position: absolute;
     top: 12px;
     right: 26px;
+    cursor: pointer;
 }
 
 .search-div {
@@ -114,5 +115,29 @@ ul.messages {
 }
 
 ul.messages li {
-    list-style: none;
+    list-style: none    ;
+}
+
+
+/* Paginação */
+
+.pagination {
+    margin-bottom: 20px;
+}
+
+.steps-link {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.steps-link .current {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/* login */
+
+.auth-card {
+    margin-bottom: 30px;
 }

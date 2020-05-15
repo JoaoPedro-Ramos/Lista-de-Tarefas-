@@ -19,15 +19,28 @@
           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Tarefas</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Usuários</span></a>
+
+                {% if user.is_authenticated %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Tarefas</span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Sobre nós</span></a>
+                    <a class="nav-link" href="#">Usuários</span></a>
+                    </li>
+                {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="/accounts/login/">Entrar</span></a>
                   </li>
+                {% endif %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Sobre nós</span></a>
+                  </li>
+                {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="/accounts/logout/">Sair</span></a>
+                </li>
+                {% endif %}
+
               </ul>
             </div>
         </nav>
